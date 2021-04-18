@@ -1,18 +1,14 @@
 import { HttpResponse, httpRequest } from '../protocols/http'
 import { MissinParamError } from '../erros/missin-param-error'
+import { badRequest } from '../helpers/http-helper'
+
 export class SignUpController {
   handle (httpRequest: httpRequest): HttpResponse {
     if (!httpRequest.body.name) {
-      return {
-        statusCode: 400,
-        body: new MissinParamError('name')
-      }
+      return badRequest(new MissinParamError('name'))
     }
     if (!httpRequest.body.email) {
-      return {
-        statusCode: 400,
-        body: new MissinParamError('email')
-      }
+      return badRequest(new MissinParamError('email'))
     }
   }
 }
